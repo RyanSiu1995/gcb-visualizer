@@ -31,7 +31,7 @@ func TestYamlToDAG(t *testing.T) {
 	}
 	for _, file := range testFiles {
 		t.Run(fmt.Sprintf("TestYamlToDAG:%s", file), func(t *testing.T) {
-			cloudBuild, err := ParseYaml("./test/fixtures/cloudbuild/cloudbuild.sample.001.yaml")
+			cloudBuild, err := ParseYaml(file)
 			assert.Empty(t, err)
 			dag := BuildStepsToDAG(cloudBuild.Steps)
 			result, err := dot.Marshal(dag, "test", "", "  ")
