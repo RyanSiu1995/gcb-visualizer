@@ -9,13 +9,11 @@ jobs:
     name: Build
     strategy:
       matrix:
-        operating-system: 
+        operating-system:
         - ubuntu-latest
         - windows-latest
         - macOS-latest
-        go-versions: 
-        - '1.11'
-        - '1.12'
+        go-versions:
         - '1.13'
         - '1.14'
     runs-on: ${{ matrix.operating-system }}
