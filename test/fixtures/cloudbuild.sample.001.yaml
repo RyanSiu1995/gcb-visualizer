@@ -1,0 +1,7 @@
+steps:
+- name: foo
+  id: A
+- name: bar
+  id: B
+  waitFor: ['-']
+- name: baz
