@@ -1,0 +1,13 @@
+# This is a build with two immediate starts
+# Step C will wait for both step A and B
+steps:
+- name: debian
+  id: A
+- name: debian
+  id: B
+  waitFor:
+  - "-"
+- name: debian
+  id: C
+- name: debian
+  id: D

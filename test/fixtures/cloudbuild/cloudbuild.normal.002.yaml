@@ -1,0 +1,9 @@
+# This is a linear build
+# The waitFor "-" will not have effect on the first step
+steps:
+- name: debian
+  waitFor:
+  - "-"
+- name: debian
+- name: debian
+- name: debian

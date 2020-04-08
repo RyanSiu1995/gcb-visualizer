@@ -1,0 +1,14 @@
+steps:
+- name: debian
+  id: A
+- name: debian
+  id: B
+  waitFor:
+  - "-"
+- name: debian
+  id: C
+# Step D will not wait for step C but step B only
+- name: debian
+  id: D
+  waitFor:
+  - B

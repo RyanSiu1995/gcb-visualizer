@@ -1,0 +1,12 @@
+strict digraph test {
+  // Node definitions.
+  0;
+  1;
+  2;
+  3;
+
+  // Edge definitions.
+  0 -> 2;
+  1 -> 2;
+  1 -> 3;
+}

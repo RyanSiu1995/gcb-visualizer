@@ -1,0 +1,16 @@
+# This is a build with two parallel pipeline
+steps:
+- name: debian
+  id: A
+  waitFor:
+  - "-"
+- name: debian
+  id: B
+  waitFor:
+  - "-"
+- name: debian
+  waitFor:
+  - A
+- name: debian
+  waitFor:
+  - B

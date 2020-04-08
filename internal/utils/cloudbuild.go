@@ -89,7 +89,7 @@ func handleWaitFor(steps []*cloudbuild.BuildStep, idx int, mapping map[string]in
 	} else {
 		log.Debugf("Node %d is handled with no waitFor case...", idx)
 		// Handle all cases without waitFor
-		for i := idx - 1; idx > 0; i-- {
+		for i := idx - 1; i >= 0; i-- {
 			if len(steps[i].WaitFor) != 0 {
 				if isLastNode(steps, mapping, idx, i) {
 					log.Debugf("Found the last node with waitFor before node %d is node %d. Adding the edge from %d to %d...", idx, i, i, idx)

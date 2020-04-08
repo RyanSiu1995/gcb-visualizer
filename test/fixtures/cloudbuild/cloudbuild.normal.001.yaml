@@ -1,0 +1,6 @@
+# This is a linear build
+steps:
+- name: debian
+- name: debian
+- name: debian
+- name: debian
