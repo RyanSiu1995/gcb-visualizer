@@ -21,7 +21,8 @@ func init() {
 
 func TestYamlToDAG(t *testing.T) {
 	var testFiles []string
-	err := filepath.Walk("./test/fixtures/cloudbuild", func(path string, info os.FileInfo, err error) error {
+	cloudbuildPath := filepath.Join("./", "test", "fixtures", "cloudbuild")
+	err := filepath.Walk(cloudbuildPath, func(path string, info os.FileInfo, err error) error {
 		if filepath.Ext(path) == ".yaml" {
 			testFiles = append(testFiles, path)
 		}
@@ -42,13 +43,14 @@ func TestYamlToDAG(t *testing.T) {
 			dotFilePath := getDotFilePath(file)
 			expected, err := ioutil.ReadFile(dotFilePath)
 			assert.Empty(t, err)
-			assert.Equal(t, string(expected), buf.String())
+			assert.Equal(t, strings.ReplaceAll(string(expected), "\r\n", "\n"), buf.String())
 		})
 	}
 }
 
 func getDotFilePath(filePath string) string {
 	ext := path.Ext(filePath)
-	filePath = filePath[0:len(filePath)-len(ext)] + ".dot"
-	return strings.ReplaceAll(filePath, "test/fixtures/cloudbuild", "test/fixtures/dot")
+	_, filename := filepath.Split(filePath)
+	dotFile := filename[0:len(filename)-len(ext)] + ".dot"
+	return filepath.Join("./", "test", "fixtures", "dot", dotFile)
 }
