@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 
 	yamlUtil "github.com/ghodss/yaml"
 	graphviz "github.com/goccy/go-graphviz"
 	"github.com/goccy/go-graphviz/cgraph"
 	log "github.com/sirupsen/logrus"
+	"github.com/skratchdot/open-golang/open"
 	cloudbuild "google.golang.org/api/cloudbuild/v1"
 )
 
@@ -66,6 +68,27 @@ func BuildStepsToDAG(steps []*cloudbuild.BuildStep) *cgraph.Graph {
 		handleWaitFor(steps, idx, mapping, graph, nodeList)
 	}
 	return graph
+}
+
+// Visualize is a high level API to show the graph
+func Visualize(graph *cgraph.Graph) error {
+	dir, err := ioutil.TempDir("", "gcb-temp")
+	if err != nil {
+		return err
+	}
+	filename := filepath.Join(dir, "temp.png")
+
+	g := graphviz.New()
+
+	if err := g.RenderFilename(graph, graphviz.PNG, filename); err != nil {
+		return err
+	}
+
+	err = open.Run(filename)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func handleWaitFor(steps []*cloudbuild.BuildStep, idx int, mapping map[string]int, graph *cgraph.Graph, nodes []*cgraph.Node) {
