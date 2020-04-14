@@ -7,7 +7,6 @@ require (
 	github.com/goccy/go-graphviz v0.0.5
 	github.com/sirupsen/logrus v1.5.0
 	github.com/stretchr/testify v1.5.1
-	gonum.org/v1/gonum v0.7.0
 	google.golang.org/api v0.21.0
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
