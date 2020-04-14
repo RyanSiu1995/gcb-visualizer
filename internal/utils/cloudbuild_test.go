@@ -49,7 +49,7 @@ func TestYamlToDAG(t *testing.T) {
 
 func getDotFilePath(filePath string) string {
 	ext := path.Ext(filePath)
-	filename := path.Base(filePath)
+	_, filename := filepath.Split(filePath)
 	dotFile := filename[0:len(filename)-len(ext)] + ".dot"
 	return filepath.Join("./", "test", "fixtures", "dot", dotFile)
 }
