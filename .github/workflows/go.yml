@@ -12,6 +12,7 @@ jobs:
         operating-system:
         - ubuntu-latest
         - macOS-latest
+        - windows-latest
         go-versions:
         - '1.13'
         - '1.14'
