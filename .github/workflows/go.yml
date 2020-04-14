@@ -31,6 +31,6 @@ jobs:
     - name: Test
       run: |
         go test ./... -v
-    - name Build Artifacts
+    - name: Build Artifacts
       run: |
         go build -ldflags="-s -w" -o gcb-visualizer
