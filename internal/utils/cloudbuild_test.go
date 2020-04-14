@@ -1,6 +1,7 @@
 package util
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
+	graphviz "github.com/goccy/go-graphviz"
 	"github.com/stretchr/testify/assert"
-	"gonum.org/v1/gonum/graph/encoding/dot"
 )
 
 func init() {
@@ -31,15 +32,17 @@ func TestYamlToDAG(t *testing.T) {
 	}
 	for _, file := range testFiles {
 		t.Run(fmt.Sprintf("TestYamlToDAG:%s", file), func(t *testing.T) {
+			g := graphviz.New()
 			cloudBuild, err := ParseYaml(file)
 			assert.Empty(t, err)
-			dag := BuildStepsToDAG(cloudBuild.Steps)
-			result, err := dot.Marshal(dag, "test", "", "  ")
+			graph := BuildStepsToDAG(cloudBuild.Steps)
+			var buf bytes.Buffer
+			err = g.Render(graph, "dot", &buf)
 			assert.Empty(t, err)
 			dotFilePath := getDotFilePath(file)
 			expected, err := ioutil.ReadFile(dotFilePath)
 			assert.Empty(t, err)
-			assert.Equal(t, strings.Trim(string(expected), "\n"), strings.Trim(string(result), "\n"))
+			assert.Equal(t, string(expected), buf.String())
 		})
 	}
 }
