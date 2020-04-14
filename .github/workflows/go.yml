@@ -30,3 +30,7 @@ jobs:
     - name: Test
       run: |
         go test ./... -v
+    - name: Lint code
+      run: |
+        go get -u golang.org/x/lint/golint
+        golint -min_confidence 1 ./...
