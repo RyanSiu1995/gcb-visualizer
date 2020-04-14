@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	graphviz "github.com/goccy/go-graphviz"
@@ -42,7 +43,7 @@ func TestYamlToDAG(t *testing.T) {
 			dotFilePath := getDotFilePath(file)
 			expected, err := ioutil.ReadFile(dotFilePath)
 			assert.Empty(t, err)
-			assert.Equal(t, string(expected), buf.String())
+			assert.Equal(t, strings.ReplaceAll(string(expected), "\r\n", "\n"), buf.String())
 		})
 	}
 }
