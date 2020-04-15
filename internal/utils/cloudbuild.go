@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	yamlUtil "github.com/ghodss/yaml"
 	graphviz "github.com/goccy/go-graphviz"
@@ -14,6 +15,13 @@ import (
 	"github.com/skratchdot/open-golang/open"
 	cloudbuild "google.golang.org/api/cloudbuild/v1"
 )
+
+var formatMapping = map[string]graphviz.Format{
+	".dot":  "dot",
+	".png":  graphviz.PNG,
+	".jpg":  graphviz.JPG,
+	".jpeg": graphviz.JPG,
+}
 
 func init() {
 	if _, exist := os.LookupEnv("DEBUG"); exist {
@@ -91,10 +99,22 @@ func Visualize(graph *cgraph.Graph) error {
 	return nil
 }
 
+// SaveGraph is a high level API to save the graph
+func SaveGraph(graph *cgraph.Graph, filename string) error {
+	g := graphviz.New()
+
+	ext := filepath.Ext(filename)
+	if err := g.RenderFilename(graph, formatMapping[strings.ToLower(ext)], filename); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func handleWaitFor(steps []*cloudbuild.BuildStep, idx int, mapping map[string]int, graph *cgraph.Graph, nodes []*cgraph.Node) {
 	waitFor := steps[idx].WaitFor
 	if len(waitFor) == 1 {
-		if !contains(waitFor, "-") {
+		if !Contains(waitFor, "-") {
 			log.Debugf("Node %d is handled with normal waitFor case with length 1...", idx)
 			from := mapping[waitFor[0]]
 			log.Debugf("Node %d has waitFor %s. Adding the edge from %d to %d...", idx, waitFor[0], from, idx)
@@ -143,7 +163,7 @@ func handleWaitFor(steps []*cloudbuild.BuildStep, idx int, mapping map[string]in
 func isLastNode(steps []*cloudbuild.BuildStep, mapping map[string]int, threshold int, idx int) bool {
 	id := steps[idx].Id
 	for i := idx; i < threshold; i++ {
-		if contains(steps[i].WaitFor, id) {
+		if Contains(steps[i].WaitFor, id) {
 			return false
 		}
 	}
