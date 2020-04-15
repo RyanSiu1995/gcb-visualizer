@@ -64,7 +64,7 @@ jobs:
         - ubuntu
         - macOS
         - windows
-    runs-on: ubutun-latest
+    runs-on: ubuntu-latest
     needs: create-release
     steps:
     - name: Download Artifacts
