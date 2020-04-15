@@ -68,7 +68,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./gcb-visualizer-ubuntu-latest.zip
-        asset_name: gcb-visualizer.${{ github.ref }}.ubuntu.zip
+        asset_name: gcb-visualizer.ubuntu.zip
         asset_content_type: application/zip
     - name: Download Artifacts
       uses: actions/download-artifact@v1
@@ -81,7 +81,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./gcb-visualizer-macOS-latest.zip
-        asset_name: gcb-visualizer.${{ github.ref }}.darwin.zip
+        asset_name: gcb-visualizer.darwin.zip
         asset_content_type: application/zip
     - name: Download Artifacts
       uses: actions/download-artifact@v1
@@ -94,5 +94,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./gcb-visualizer-windows-latest.zip
-        asset_name: gcb-visualizer.${{ github.ref }}.windows.zip
+        asset_name: gcb-visualizer.windows.zip
         asset_content_type: application/zip
