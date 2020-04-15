@@ -40,7 +40,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: gcb-visualizer-${{ matrix.operating-system }}.zip
+        name: artifacts
         path: gcb-visualizer-${{ matrix.operating-system }}.zip
   create-release:
     name: Upload
@@ -60,39 +60,31 @@ jobs:
     - name: Download Artifacts
       uses: actions/download-artifact@v1
       with:
-        name: gcb-visualizer-ubuntu-latest.zip
+        name: artifacts
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./gcb-visualizer-ubuntu-latest.zip
+        asset_path: ./artifacts/gcb-visualizer-ubuntu-latest.zip
         asset_name: gcb-visualizer.ubuntu.zip
         asset_content_type: application/zip
-    - name: Download Artifacts
-      uses: actions/download-artifact@v1
-      with:
-        name: gcb-visualizer-macOS-latest.zip
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./gcb-visualizer-macOS-latest.zip
+        asset_path: ./artifacts/gcb-visualizer-macOS-latest.zip
         asset_name: gcb-visualizer.darwin.zip
         asset_content_type: application/zip
-    - name: Download Artifacts
-      uses: actions/download-artifact@v1
-      with:
-        name: gcb-visualizer-windows-latest.zip
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./gcb-visualizer-windows-latest.zip
+        asset_path: ./artifacts/gcb-visualizer-windows-latest.zip
         asset_name: gcb-visualizer.windows.zip
         asset_content_type: application/zip
