@@ -11,13 +11,15 @@ From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-bui
 1. By declaring that a step depends only on `-`, the step runs immediately when the build starts.
 
 ## How to install
-1. Through `go get`
-You can install the binary through the following command.
-```
-go get -u github.com/RyanSiu1995/gcb-visualizer
-```
+1. Through `go get` (Recommended)
+
+   You can install the binary through the following command.
+   ```bash
+   go get -u github.com/RyanSiu1995/gcb-visualizer
+   ```
 1. Install the pre-built binary
-You can download the pre-built binary in [release page](https://github.com/RyanSiu1995/gcb-visualizer/releases) of this repo.
+
+   You can download the pre-built binary in [release page](https://github.com/RyanSiu1995/gcb-visualizer/releases) of this repo. Because of the C binding in the Graphviz library, there is a difficulty in building binary based on different common OS and Arch. If the pre-built binary does not work. Please report on the issue.
 
 ## How to use
 You can visualize your pipeline with the following command.
@@ -29,3 +31,14 @@ If you want to output the graph into other formats, you can use the output flag 
 gcb-visualizer --output my-pipeline.jpg <your-cloudbuild-yaml>
 ```
 The current supported output formats are jpg, jpeg, dot and png.
+
+## Future features
+* JSON format support
+* Cloudbuild definition linting and checking
+* Multiple OS and Arch binary building
+
+## Contributing
+Please feel free to submit a pull request or open an issue for the application improvement.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details
