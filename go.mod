@@ -1,4 +1,4 @@
-module github.com/RyanSiu1995/cloudbuild-visualizer
+module github.com/RyanSiu1995/gcb-visualizer
 
 go 1.14
 

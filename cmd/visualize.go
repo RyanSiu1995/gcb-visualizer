@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	util "github.com/RyanSiu1995/cloudbuild-visualizer/internal/utils"
+	util "github.com/RyanSiu1995/gcb-visualizer/internal/utils"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"os"

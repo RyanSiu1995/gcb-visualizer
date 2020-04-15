@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/RyanSiu1995/cloudbuild-visualizer/cmd"
+	"github.com/RyanSiu1995/gcb-visualizer/cmd"
 	log "github.com/sirupsen/logrus"
 	"os"
 )
