@@ -26,11 +26,17 @@ jobs:
       run: |
         go get -v -t -d ./...
     - name: Build Artifacts
+      if: matrix.operating-system != 'windows-latest'
       run: |
         go build -ldflags="-s -w" -o gcb-visualizer
-        zip gcb-visualizer-${{ matrix.operating-system }}.zip gcb-visualizer gcb-visualizer.exe
-        rm -f gcb-visualizer
-        rm -f gcb-visualizer.exe
+        zip gcb-visualizer-${{ matrix.operating-system }}.zip gcb-visualizer
+        rm gcb-visualizer
+    - name: Build Artifacts
+      if: matrix.operating-system == 'windows-latest'
+      run: |
+        go build -ldflags="-s -w" -o gcb-visualizer.exe
+        compress-archive -destinationpath gcb-visualizer-${{ matrix.operating-system }}.zip -path gcb-visualizer.exe -compressionlevel optimal
+        rm gcb-visualizer.exe
   upload:
     name: Upload
     runs-on: ubuntu-latest
