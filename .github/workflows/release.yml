@@ -40,8 +40,8 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: gcb-visualizer-{{ matrix.operating-system }}.zip
-        path: gcb-visualizer-{{ matrix.operating-system }}.zip
+        name: gcb-visualizer-${{ matrix.operating-system }}.zip
+        path: gcb-visualizer-${{ matrix.operating-system }}.zip
   create-release:
     name: Upload
     runs-on: ubuntu-latest
@@ -70,13 +70,13 @@ jobs:
     - name: Download Artifacts
       uses: actions/download-artifact@v1
       with:
-        name: gcb-visualizer-{{ matrix.operating-system }}-latest.zip
+        name: gcb-visualizer-${{ matrix.operating-system }}-latest.zip
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ job.create-release.steps.create_release.outputs.upload_url }}
-        asset_path: ./gcb-visualizer-{{ matrix.operating-system }}.zip
-        asset_name: gcb-visualizer.{{ github.ref}}.{{ matrix.operating-system }}.zip
+        asset_path: ./gcb-visualizer-${{ matrix.operating-system }}.zip
+        asset_name: gcb-visualizer.${{ github.ref}}.${{ matrix.operating-system }}.zip
         asset_content_type: application/zip
