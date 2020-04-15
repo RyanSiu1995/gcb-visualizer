@@ -55,28 +55,44 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        draft: false
+        draft: true
         prerelease: false
-  upload-release:
-    strategy:
-      matrix:
-        operating-system:
-        - ubuntu
-        - macOS
-        - windows
-    runs-on: ubuntu-latest
-    needs: create-release
-    steps:
     - name: Download Artifacts
       uses: actions/download-artifact@v1
       with:
-        name: gcb-visualizer-${{ matrix.operating-system }}-latest.zip
+        name: gcb-visualizer-ubuntu-latest.zip
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ job.create-release.steps.create_release.outputs.upload_url }}
-        asset_path: ./gcb-visualizer-${{ matrix.operating-system }}.zip
-        asset_name: gcb-visualizer.${{ github.ref}}.${{ matrix.operating-system }}.zip
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./gcb-visualizer-ubuntu-latest.zip
+        asset_name: gcb-visualizer.${{ github.ref }}.ubuntu.zip
+        asset_content_type: application/zip
+    - name: Download Artifacts
+      uses: actions/download-artifact@v1
+      with:
+        name: gcb-visualizer-macOS-latest.zip
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./gcb-visualizer-macOS-latest.zip
+        asset_name: gcb-visualizer.${{ github.ref }}.darwin.zip
+        asset_content_type: application/zip
+    - name: Download Artifacts
+      uses: actions/download-artifact@v1
+      with:
+        name: gcb-visualizer-windows-latest.zip
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./gcb-visualizer-windows-latest.zip
+        asset_name: gcb-visualizer.${{ github.ref }}.windows.zip
         asset_content_type: application/zip
