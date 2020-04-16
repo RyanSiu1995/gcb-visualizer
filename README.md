@@ -29,11 +29,11 @@ From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-bui
 ## How to use
 You can visualize your pipeline with the following command.
 ```bash
-gcb-visualizer <your-cloudbuild-yaml>
+gcb-visualizer visualize <your-cloudbuild-yaml>
 ```
 If you want to output the graph into other formats, you can use the output flag as the following.
 ```bash
-gcb-visualizer --output my-pipeline.jpg <your-cloudbuild-yaml>
+gcb-visualizer visualize --output my-pipeline.jpg <your-cloudbuild-yaml>
 ```
 The current supported output formats are jpg, jpeg, dot and png.
 
