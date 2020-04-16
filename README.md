@@ -46,7 +46,10 @@ The current supported output formats are jpg, jpeg, dot and png.
 * More beautiful generated graph
 
 ## Contributing
-Please feel free to submit a pull request or open an issue for the application improvement.
+Please feel free to submit a pull request or open an issue for the application improvement. Before creating the pull request, please kindly run the follow command to test the program
+```bash
+make tests
+```
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details
