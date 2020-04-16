@@ -61,7 +61,7 @@ func BuildStepsToDAG(steps []*cloudbuild.BuildStep) *cgraph.Graph {
 
 	var nodeList []*cgraph.Node
 	for idx, step := range steps {
-		name := step.Id
+		name := step.Name
 		if name == "" {
 			name = fmt.Sprintf("Step %d", idx)
 		}
