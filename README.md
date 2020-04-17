@@ -38,7 +38,7 @@ gcb-visualizer --output my-pipeline.jpg <your-cloudbuild-yaml>
 The current supported output formats are jpg, jpeg, dot and png.
 
 ## Example Output
-Given an example input of something like the [Google Cloud Go Builder cloudbuild.yaml](https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/go/cloudbuild.yaml)
+Given an example input of something like the [Google Cloud integration test example](https://github.com/GoogleCloudPlatform/cloudbuild-integration-testing/blob/master/cloudbuild.compose.yaml)
 you should get an output that looks something like this 
 ![Go Builder output](./example/example.png)
 
