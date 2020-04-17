@@ -39,7 +39,8 @@ The current supported output formats are jpg, jpeg, dot and png.
 
 ## Example Output
 Given an example input of something like the [Google Cloud integration test example](https://github.com/GoogleCloudPlatform/cloudbuild-integration-testing/blob/master/cloudbuild.compose.yaml)
-you should get an output that looks something like this 
+you should get an output that looks something like this
+
 ![Go Builder output](./example/example.png)
 
 ## Future features
