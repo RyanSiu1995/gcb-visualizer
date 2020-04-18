@@ -14,6 +14,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var supportedFormat = []string{".yaml", ".yml", ".json"}
+
 func init() {
 	// Change the current working dir to root dir
 	os.Chdir("../../")
@@ -23,7 +25,7 @@ func TestYamlToDAG(t *testing.T) {
 	var testFiles []string
 	cloudbuildPath := filepath.Join("./", "test", "fixtures", "cloudbuild")
 	err := filepath.Walk(cloudbuildPath, func(path string, info os.FileInfo, err error) error {
-		if filepath.Ext(path) == ".yaml" {
+		if Contains(supportedFormat, filepath.Ext(path)) {
 			testFiles = append(testFiles, path)
 		}
 		return nil

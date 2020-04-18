@@ -1,0 +1,1 @@
+{"steps": [{"name": "debian", "id": "A"}, {"name": "debian", "id": "B", "waitFor": ["-"]}, {"name": "debian", "id": "C"}, {"name": "debian", "id": "D", "waitFor": ["B"]}]}

@@ -31,20 +31,29 @@ func init() {
 
 // ParseYaml takes a string of file path and returns the cloud build object
 func ParseYaml(filePath string) (*cloudbuild.Build, error) {
-	yamlFileInByte, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		fmt.Println(err.Error())
-		return nil, err
-	}
-
-	jsonFileInByte, err := yamlUtil.YAMLToJSON(yamlFileInByte)
-	if err != nil {
-		fmt.Println(err.Error())
-		return nil, err
+	var jsonFileInByte []byte
+	var err error
+	if strings.ToLower(filepath.Ext(filePath)) != ".json" {
+		yamlFileInByte, err := ioutil.ReadFile(filePath)
+		if err != nil {
+			fmt.Println(err.Error())
+			return nil, err
+		}
+		jsonFileInByte, err = yamlUtil.YAMLToJSON(yamlFileInByte)
+		if err != nil {
+			fmt.Println(err.Error())
+			return nil, err
+		}
+	} else {
+		jsonFileInByte, err = ioutil.ReadFile(filePath)
+		if err != nil {
+			fmt.Println(err.Error())
+			return nil, err
+		}
 	}
 
 	var build cloudbuild.Build
-	if err := json.Unmarshal(jsonFileInByte, &build); err != nil {
+	if err = json.Unmarshal(jsonFileInByte, &build); err != nil {
 		fmt.Println(err.Error())
 	}
 
