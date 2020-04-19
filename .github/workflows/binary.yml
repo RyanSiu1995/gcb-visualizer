@@ -28,7 +28,7 @@ jobs:
     - name: Install 32 bits libaries
       if: ${{ matrix.arch }} == '386'
       run: |
-        apt-get update && apt-get install gcc-multilib -y -q
+        sudo apt-get update && sudo apt-get install gcc-multilib -y -q
     - name: Get dependencies
       run: |
         go get -v -t -d ./...
