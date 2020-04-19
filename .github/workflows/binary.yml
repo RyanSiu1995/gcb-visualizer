@@ -29,10 +29,25 @@ jobs:
       if: ${{ matrix.arch }} == '386'
       run: |
         sudo apt-get update && sudo apt-get install gcc-multilib -y -q
+    - name: Install 32 bits libraries for Windows
+      if: ${{ matrix.arch }} == '386' && ${{ matrix.windows }} == 'windows'
+      run:
+        sudo apt-get update && sudo apt-get install gcc-mingw-w64 -y -q
     - name: Get dependencies
       run: |
         go get -v -t -d ./...
+    - name: Build Artifacts for 32bits Windows
+      if: ${{ matrix.arch }} == '386' && ${{ matrix.windows }} == 'windows'
+      run: |
+        go build -ldflags="-s -w"
+      env:
+        CGO_ENABLED: "1"
+        GOOS: ${{ matrix.operating-system }}
+        GOARCH: ${{ matrix.arch }}
+        CXX_FOR_TARGET: i686-w64-mingw32-g++
+        CC_FOR_TARGET: i686-w64-mingw32-gcc
     - name: Build Artifacts
+      if: ${{ matrix.arch }} != '386' && ${{ matrix.windows }} != 'windows'
       run: |
         go build -ldflags="-s -w"
       env:
