@@ -10,6 +10,6 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -ldflags="-s -w" -o gcb-visualizer .
+RUN go build -ldflags="-s -w" -o /bin/gcb-visualizer .
 
-ENTRYPOINT ["./gcb-visualizer"]
+ENTRYPOINT ["gcb-visualizer"]
