@@ -6,7 +6,7 @@ import (
 	"runtime"
 )
 
-const ver string = "1.0.0"
+const ver string = "1.0.1"
 
 func init() {
 	var version = &cobra.Command{
