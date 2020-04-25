@@ -24,7 +24,7 @@ From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-bui
    ```
 1. Install the pre-built binary
 
-   You can download the pre-built binary in [release page](https://github.com/RyanSiu1995/gcb-visualizer/releases) of this repo. Because of the C binding in the Graphviz library, there is a difficulty in building binary based on different common OS and Arch. If the pre-built binary does not work. Please report on the issue.
+   You can download the pre-built binary in [release page](https://github.com/RyanSiu1995/gcb-visualizer/releases) of this repo. Because of the C binding in the Graphviz library, there is a difficulty in building binary based on different common OS and Arch. The current pre-built binaries are built under 64 bit. If you are an user with 32 bits system, please use other approach. If the pre-built binary does not work. Please report on the issue.
 1. Use pre-built docker image
 
    You can use docker image released to execute the gcb-visualizer without considering the OS and Arch. Please follow this instruction to setup the command alias.
