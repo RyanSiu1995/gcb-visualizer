@@ -25,6 +25,19 @@ From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-bui
 1. Install the pre-built binary
 
    You can download the pre-built binary in [release page](https://github.com/RyanSiu1995/gcb-visualizer/releases) of this repo. Because of the C binding in the Graphviz library, there is a difficulty in building binary based on different common OS and Arch. If the pre-built binary does not work. Please report on the issue.
+1. Use pre-built docker image
+
+   You can use docker image released to execute the gcb-visualizer without considering the OS and Arch. Please follow this instruction to setup the command alias.
+   ```bash
+   docker pull ryansiu1995/gcb-visualizer:latest
+   alias gcb-visualizer="docker run -v $(pwd):/app ryansiu1995/gcb-visualizer:latest"
+   ```
+   or this command in powershell
+   ```powershell
+   docker pull ryansiu1995/gcb-visualizer:latest
+   Set-Alias gcb-visualizer "docker run -v $(pwd):/app ryansiu1995/gcb-visualizer:latest"
+   ```
+   You can put the alias to your profile in order to create a permanent alias.
 
 ## How to use
 You can visualize your pipeline with the following command.
