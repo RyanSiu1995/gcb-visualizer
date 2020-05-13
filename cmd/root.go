@@ -2,17 +2,18 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"os"
 )
 
-var rootCmd = &cobra.Command{
-	Use:   "gcb-visualizer",
-	Short: "GCB visualizer will visualize the google cloud build pipeline",
-	Args:  cobra.ExactArgs(0),
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
-		os.Exit(0)
-	},
+var rootCmd *cobra.Command
+
+func init() {
+	rootCmd = &cobra.Command{
+		Use:   "gcb-visualizer [cloud build YAML path]",
+		Short: "GCB visualizer will visualize the google cloud build pipeline",
+		Args:  cobra.ExactArgs(1),
+		Run:   visualize,
+	}
+	rootCmd.Flags().StringVarP(&output, "output", "o", "", "Specify the output file, a temp png image by default (Support: dot, jpg and png)")
 }
 
 // Execute will execute the cobra-based command
