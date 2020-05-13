@@ -2,11 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"runtime"
-)
 
-const ver string = "1.0.1"
+	"github.com/spf13/cobra"
+)
 
 func init() {
 	var version = &cobra.Command{
