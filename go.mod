@@ -3,6 +3,7 @@ module github.com/RyanSiu1995/gcb-visualizer
 go 1.14
 
 require (
+	cloud.google.com/go v0.57.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/goccy/go-graphviz v0.0.5
 	github.com/sirupsen/logrus v1.5.0
@@ -10,5 +11,7 @@ require (
 	github.com/spf13/cobra v1.0.0
 	github.com/stretchr/testify v1.5.1
 	google.golang.org/api v0.21.0
+	google.golang.org/api v0.22.0
+	google.golang.org/genproto v0.0.0-20200430143042-b979b6f78d84
 	gopkg.in/yaml.v2 v2.2.8
 )
