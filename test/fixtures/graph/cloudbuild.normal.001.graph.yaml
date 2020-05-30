@@ -1,0 +1,12 @@
+nodes:
+- Step 0
+- Step 1
+- Step 2
+- Step 3
+edges:
+- from: Step 0
+  to: Step 1
+- from: Step 1
+  to: Step 2
+- from: Step 2
+  to: Step 3

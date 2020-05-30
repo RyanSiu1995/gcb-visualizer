@@ -1,0 +1,14 @@
+nodes:
+- A
+- C
+- B
+- D
+edges:
+- from: A
+  to: C
+- from: B
+  to: C
+- from: B
+  to: D
+- from: C
+  to: D
