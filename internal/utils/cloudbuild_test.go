@@ -75,6 +75,7 @@ func isExpectedGraph(t *testing.T, expected *result, actual *cgraph.Graph) {
 		assert.NotEmptyf(t, n, "Expected Node %s but not found in generated graph", node)
 	}
 	assert.Equalf(t, len(expected.Edges), actual.NumberEdges(), "Should have the same number of edges.")
+	// FIXME This may not be too good to compare the edge. We may need a better way to compare them programmatically
 	var buf bytes.Buffer
 	g := graphviz.New()
 	g.Render(actual, "dot", &buf)
