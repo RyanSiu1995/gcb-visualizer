@@ -9,12 +9,12 @@ get:
 	go get -v -t -d ./...
 
 format-lint:
-	errors=$$(gofmt -l .); if [ "$${errors}" != "" ]; then echo "Format Lint Error Files:\n$${errors}"; exit 1; fi
+	gofmt -l -d .
 
 import-lint:
-	errors=$$(goimports -l .); if [ "$${errors}" != "" ]; then echo "Import Lint Error Files:\n$${errors}"; exit 1; fi
+	goimports -l -d .
 
 style-lint:
-	errors=$$(golint ./...); if [ "$${errors}" != "" ]; then echo "Style Lint Error Files:\n$${errors}"; exit 1; fi
+	golint ./...
 
 lint: format-lint import-lint style-lint
