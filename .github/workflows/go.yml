@@ -30,9 +30,9 @@ jobs:
         make get
     - name: Lint Code
       run: |
-        go get -u golang.org/x/tools/cmd/goimports
-        go get -u golang.org/x/lint/golint
-        export PATH=$PATH:$GOPATH/bin
+        GOBIN=$PWD/bin go install golang.org/x/tools/cmd/goimports
+        GOBIN=$PWD/bin go install golang.org/x/lint/golint
+        export PATH=$PATH:$PWD/bin
         make lint
     - name: Test
       run: |
