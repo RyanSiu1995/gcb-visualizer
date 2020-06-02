@@ -1,9 +1,12 @@
 build:
-	go build -ldflags="-s -w"
+	go build -ldflags="-s -w" -o gcb-visualizer
 
 .PHONY: test
 test:
 	go test -count=1 ./...
+
+get:
+	go get -v -t -d ./...
 
 format-lint:
 	errors=$$(gofmt -l .); if [ "$${errors}" != "" ]; then echo "Format Lint Error Files:\n$${errors}"; exit 1; fi
