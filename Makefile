@@ -1,3 +1,5 @@
+BIN=$(GOBIN)
+
 build:
 	go build -ldflags="-s -w" -o gcb-visualizer
 
@@ -12,9 +14,9 @@ format-lint:
 	gofmt -l -d .
 
 import-lint:
-	goimports -l -d .
+	${BIN}/goimports -l -d .
 
 style-lint:
-	golint ./...
+	${BIN}/golint ./...
 
 lint: format-lint import-lint style-lint
