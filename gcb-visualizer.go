@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/RyanSiu1995/gcb-visualizer/cmd"
 	log "github.com/sirupsen/logrus"
-	"os"
 )
 
 func init() {
