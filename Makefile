@@ -1,5 +1,7 @@
+.PHONY: build
 build:
 	go build -ldflags="-s -w"
 
+.PHONY: tests
 tests:
-	go test -count=1 ./...
+	go test -coverprofile coverage.txt -count=1 ./...
