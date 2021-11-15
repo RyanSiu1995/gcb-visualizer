@@ -20,6 +20,9 @@ jobs:
         - '1.16'
         - '1.17'
     runs-on: ${{ matrix.operating-system }}
+    env:
+      OS: ${{ matrix.operating-system }}
+      GO: ${{ matrix.go-versions }}
     steps:
     - name: Set up Go ${{ matrix.go-versions }}
       uses: actions/setup-go@v1
@@ -33,7 +36,14 @@ jobs:
         go get -v -t -d ./...
     - name: Test
       run: |
-        go test ./... -v
+        go test -coverprofile coverage.out ./... -v
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        env_vars: OS,GO
+        fail_ci_if_error: true
+        files: ./coverage.out
+        verbose: true
     - name: Build Artifacts
       run: |
         go build -ldflags="-s -w" -o gcb-visualizer
