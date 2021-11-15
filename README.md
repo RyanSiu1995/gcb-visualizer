@@ -8,6 +8,7 @@ For the current version of Google cloud build, it supports the async process wit
 * YAML format cloud build definition digestion
 * Temporary graph rendering
 * Save graph as dot, png, jpg or jpeg
+* JSON format support
 
 ## Rule of cloud build async process
 From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-builds/configure-build-step-order), there are a few rules for the async process.
@@ -42,7 +43,7 @@ From the Google [docs](https://cloud.google.com/cloud-build/docs/configuring-bui
 ## How to use
 You can visualize your pipeline with the following command.
 ```bash
-gcb-visualizer visualize <your-cloudbuild-yaml>
+gcb-visualizer visualize <your-cloudbuild-yaml-or-json-file>
 ```
 If you want to output the graph into other formats, you can use the output flag as the following.
 ```bash
@@ -57,7 +58,6 @@ you should get an output that looks something like this
 ![Go Builder output](./example/example.png)
 
 ## Future features
-* JSON format support
 * Cloudbuild definition linting and checking
 * Multiple OS and Arch binary building
 * Brew, Apt and Chocolatey support
