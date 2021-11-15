@@ -16,6 +16,9 @@ jobs:
         go-versions:
         - '1.13'
         - '1.14'
+        - '1.15'
+        - '1.16'
+        - '1.17'
     runs-on: ${{ matrix.operating-system }}
     steps:
     - name: Set up Go ${{ matrix.go-versions }}
