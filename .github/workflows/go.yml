@@ -14,11 +14,11 @@ jobs:
         - macOS-latest
         - windows-latest
         go-versions:
-        - '1.13'
-        - '1.14'
-        - '1.15'
         - '1.16'
         - '1.17'
+        - '1.18'
+        - '1.19'
+        - '1.20'
     runs-on: ${{ matrix.operating-system }}
     env:
       OS: ${{ matrix.operating-system }}
