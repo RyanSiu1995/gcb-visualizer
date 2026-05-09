@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -62,7 +61,7 @@ func getExpectedResult(filePath string) *result {
 	yamlFile := filename[0:len(filename)-len(ext)] + ".graph.yaml"
 	fullPath := filepath.Join("./", "test", "fixtures", "graph", yamlFile)
 	resultObj := result{}
-	buf, _ := ioutil.ReadFile(fullPath)
+	buf, _ := os.ReadFile(fullPath)
 	yaml.Unmarshal(buf, &resultObj)
 	return &resultObj
 }

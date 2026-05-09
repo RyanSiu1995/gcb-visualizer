@@ -3,12 +3,11 @@ package util
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
-	yamlUtil "github.com/ghodss/yaml"
+	"sigs.k8s.io/yaml"
 	graphviz "github.com/goccy/go-graphviz"
 	"github.com/goccy/go-graphviz/cgraph"
 	log "github.com/sirupsen/logrus"
@@ -34,18 +33,18 @@ func ParseYaml(filePath string) (*cloudbuild.Build, error) {
 	var jsonFileInByte []byte
 	var err error
 	if strings.ToLower(filepath.Ext(filePath)) != ".json" {
-		yamlFileInByte, err := ioutil.ReadFile(filePath)
+		yamlFileInByte, err := os.ReadFile(filePath)
 		if err != nil {
 			fmt.Println(err.Error())
 			return nil, err
 		}
-		jsonFileInByte, err = yamlUtil.YAMLToJSON(yamlFileInByte)
+		jsonFileInByte, err = yaml.YAMLToJSON(yamlFileInByte)
 		if err != nil {
 			fmt.Println(err.Error())
 			return nil, err
 		}
 	} else {
-		jsonFileInByte, err = ioutil.ReadFile(filePath)
+		jsonFileInByte, err = os.ReadFile(filePath)
 		if err != nil {
 			fmt.Println(err.Error())
 			return nil, err
@@ -89,7 +88,7 @@ func BuildStepsToDAG(steps []*cloudbuild.BuildStep) *cgraph.Graph {
 
 // Visualize is a high level API to show the graph
 func Visualize(graph *cgraph.Graph) error {
-	dir, err := ioutil.TempDir("", "gcb-temp")
+	dir, err := os.MkdirTemp("", "gcb-temp")
 	if err != nil {
 		return err
 	}

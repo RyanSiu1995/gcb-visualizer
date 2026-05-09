@@ -12,20 +12,19 @@ jobs:
         - ubuntu-latest
         - macOS-latest
         - windows-latest
-        go-versions:
-        - '1.14'
+        go-version:
+        - '1.25'
     runs-on: ${{ matrix.operating-system }}
     steps:
-    - name: Set up Go ${{ matrix.go-versions }}
-      uses: actions/setup-go@v1
+    - name: Check out repository
+      uses: actions/checkout@v4
+    - name: Set up Go
+      uses: actions/setup-go@v4
       with:
-        go-version: ${{ matrix.go-versions }}
-      id: go
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v2
-    - name: Get dependencies
+        go-version: ${{ matrix.go-version }}
+    - name: Download dependencies
       run: |
-        go get -v -t -d ./...
+        go mod download
     - name: Build Artifacts
       if: matrix.operating-system != 'windows-latest'
       run: |
@@ -39,7 +38,7 @@ jobs:
         compress-archive -destinationpath gcb-visualizer-${{ matrix.operating-system }}.zip -path gcb-visualizer.exe -compressionlevel optimal
         rm gcb-visualizer.exe
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: artifacts
         path: gcb-visualizer-${{ matrix.operating-system }}.zip
@@ -59,7 +58,7 @@ jobs:
         draft: true
         prerelease: false
     - name: Download Artifacts
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v3
       with:
         name: artifacts
     - name: Upload Release Asset
