@@ -14,7 +14,6 @@ jobs:
         - macOS-latest
         - windows-latest
         go-version:
-        - '1.24'
         - '1.25'
     runs-on: ${{ matrix.os }}
     steps:
@@ -29,13 +28,7 @@ jobs:
         go mod download
     - name: Test
       run: |
-        go test -coverprofile=coverage.out ./... -v
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
-      with:
-        files: coverage.out
-        fail_ci_if_error: true
-        verbose: true
+        go test -v ./...
     - name: Build Artifacts
       run: |
         go build -ldflags="-s -w" -o gcb-visualizer
