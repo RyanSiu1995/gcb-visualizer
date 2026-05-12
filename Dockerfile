@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.25
 
 LABEL maintainer="Ryan Siu <ryansiu1995@gmail.com>"
 
