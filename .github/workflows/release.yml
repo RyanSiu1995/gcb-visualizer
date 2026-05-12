@@ -40,7 +40,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: artifacts
+        name: artifacts-${{ matrix.operating-system }}
         path: gcb-visualizer-${{ matrix.operating-system }}.zip
   create-release:
     name: Upload
@@ -48,17 +48,17 @@ jobs:
     needs: build
     steps:
     - name: Download Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v8
       with:
-        name: artifacts
+        path: artifacts
+        merge-multiple: true
+    - name: List the artifacts
+      run: ls -R artifacts
     - name: Release
       uses: softprops/action-gh-release@v3
       with:
         draft: true
-        files: |
-          gcb-visualizer-ubuntu-latest.zip
-          gcb-visualizer-macOS-latest.zip
-          gcb-visualizer-windows-latest.zip
-        name: Release ${{ github.ref }}
+        files: "*"
+        name: Release ${{ github.ref_name }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        working_directory: ./artifacts/
+        working_directory: artifacts
